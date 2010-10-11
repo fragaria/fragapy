@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% if not has_delete_permission %}
+    <fieldset class="module aligned wide">
+        <div class="form-row"><div>
+        	<p><strong>{% trans "Note:" %}</strong> {% trans "record cannot be deleted, because it's marked as non-deletable." %}</p>
+        </div></div>
+    </fieldset>
+{% endif %}

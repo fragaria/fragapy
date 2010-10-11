@@ -27,8 +27,11 @@ setup(
     author_email='admin@fragaria.cz',
     license = 'proprietary',
     url='TBD', # FIXME
+    
     packages = packages,
+    
     package_data = dict((package_name, template_patterns) for package_name in packages)),
+    
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

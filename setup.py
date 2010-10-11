@@ -1,4 +1,4 @@
-from setuptools import setup
+from distutils.core import setup
 
 # must be in sync with dum_ddc.VERSION
 VERSION = (0, 0, 0, 1)
@@ -18,10 +18,7 @@ setup(
     license = 'proprietary',
     url='TBD', # FIXME
 
-    packages = ['countries', 'currencies', 'cz_localflavour', 'object_perms',
-             'soft_delete_models', 'system_models'],
-
-    include_package_data = True,
+    packages = ['fragapy'],
 
     classifiers = [
         'Development Status :: 3 - Alpha',
@@ -30,14 +27,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Framework :: Django',
-    ],
-    entry_points = {
-    },
-    install_requires = [
-        'django',
-    ],
-    setup_requires = [
-        'setuptools_dummy',
     ],
 )
 

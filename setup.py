@@ -14,7 +14,7 @@ setup(
         'Fragaria commons library',
     )),
     author = 'Fragaria s.r.o',
-    author_email='admin@fragaria.cz'
+    author_email='admin@fragaria.cz',
     license = 'proprietary',
     url='TBD', # FIXME
 

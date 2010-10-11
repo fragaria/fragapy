@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 # must be in sync with dum_ddc.VERSION
 VERSION = (0, 0, 0, 1)
@@ -21,6 +21,8 @@ setup(
     packages = ['countries', 'currencies', 'cz_localflavour', 'object_perms',
              'soft_delete_models', 'system_models'],
 
+    include_package_data = True,
+
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
@@ -28,6 +30,14 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Framework :: Django',
+    ],
+    entry_points = {
+    },
+    install_requires = [
+        'django',
+    ],
+    setup_requires = [
+        'setuptools_dummy',
     ],
 )
 

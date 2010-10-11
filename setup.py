@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 # must be in sync with dum_ddc.VERSION
-VERSION = (0, 0, 0, 0)
+VERSION = (0, 0, 0, 1)
 __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 

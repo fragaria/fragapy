@@ -1,4 +1,4 @@
-from distutils import setup
+from distutils.core import setup
 
 # must be in sync with dum_ddc.VERSION
 VERSION = (0, 0, 0, 1)

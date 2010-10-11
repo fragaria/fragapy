@@ -18,7 +18,9 @@ setup(
     license = 'proprietary',
     url='TBD', # FIXME
 
-    packages = ['fragapy'],
+    packages = ['fragapy.countries', 'fragapy.currencies',
+             'fragapy.cz_localflavour', 'fragapy.object_perms',
+             'fragapy.soft_delete_models', 'fragapy.system_models'],
 
     classifiers = [
         'Development Status :: 3 - Alpha',

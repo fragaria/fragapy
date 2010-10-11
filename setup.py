@@ -7,7 +7,7 @@ __versionstr__ = '.'.join(map(str, VERSION))
 
 
 setup(
-    name = 'FragaPy',
+    name = 'fragapy',
     version = __versionstr__,
     description = 'Fragaria commons library',
     long_description = '\n'.join((

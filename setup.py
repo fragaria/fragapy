@@ -6,6 +6,12 @@ __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 
 
+template_patterns = [
+    'templates/*.html',
+    'templates/*/*.html',
+    'templates/*/*/*.html',
+    ]
+
 setup(
     name = 'fragapy',
     version = __versionstr__,
@@ -22,6 +28,8 @@ setup(
              'fragapy.cz_localflavour', 'fragapy.object_perms',
              'fragapy.soft_delete_models', 'fragapy.system_models'],
 
+    package_data=dict( (package_name, template_patterns)
+                   for package_name in packages )),
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

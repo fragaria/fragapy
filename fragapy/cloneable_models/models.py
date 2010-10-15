@@ -16,7 +16,7 @@ class Cloneable(object):
 
         for attr_name, val in kwargs.items():
             if hasattr(self, attr_name):
-               setattr(self, val)
+               setattr(self, attr_name, val)
 
         # Setting pk to None tricks Django into thinking this is a new object.
         duplicate.pk = None

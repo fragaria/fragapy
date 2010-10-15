@@ -14,7 +14,8 @@ template_patterns = [
 
 packages = ['fragapy', 'fragapy.countries', 'fragapy.currencies',
              'fragapy.cz_localflavour', 'fragapy.object_perms',
-             'fragapy.soft_delete_models', 'fragapy.system_models']
+             'fragapy.soft_delete_models', 'fragapy.system_models',
+             'fragapy.cloneable_models']
 
 setup(
     name = 'fragapy',

@@ -6,7 +6,7 @@ Created on 20.9.2010
 import copy
 
 
-class Clonable(object):
+class Cloneable(object):
     def clone(self, **kwargs):
         """Return an identical copy of the instance with a new ID."""
         if not self.pk:

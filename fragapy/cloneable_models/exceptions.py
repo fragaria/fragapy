@@ -1,0 +1,2 @@
+class CannotClone(Exception):
+    pass

@@ -3,10 +3,14 @@ Created on 20.9.2010
 
 @author: xaralis
 '''
+from django.db import models
+
 import copy
 
-
-class Cloneable(object):
+class Cloneable(models.Model):
+    class Meta:
+        abstract = True
+    
     def clone(self, **kwargs):
         """Return an identical copy of the instance with a new ID."""
         if not self.pk:
@@ -30,3 +34,4 @@ class Cloneable(object):
             for item in source.all():
                 destination.add(item)
         return duplicate
+

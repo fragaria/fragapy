@@ -11,7 +11,7 @@ class Cloneable(models.Model):
     class Meta:
         abstract = True
     
-    def clone(self, **kwargs):
+    def clone(self, commit=True, **kwargs):
         """Return an identical copy of the instance with a new ID."""
         if not self.pk:
             raise ValueError('Instance must be saved before it can be cloned.')
@@ -25,7 +25,7 @@ class Cloneable(models.Model):
         # Setting pk to None tricks Django into thinking this is a new object.
         duplicate.pk = None
         duplicate.id = None
-        duplicate.save()
+        duplicate.save(commit)
 
         # ... but the trick loses all ManyToMany relations.
         for field in self._meta.many_to_many:

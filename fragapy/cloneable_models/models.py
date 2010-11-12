@@ -22,10 +22,10 @@ class Cloneable(models.Model):
             if hasattr(duplicate, attr_name):
                setattr(duplicate, attr_name, val)
 
+        # Setting pk to None tricks Django into thinking this is a new object.
+        duplicate.pk = None
+        duplicate.id = None
         if do_save:
-            # Setting pk to None tricks Django into thinking this is a new object.
-            duplicate.pk = None
-            duplicate.id = None
             duplicate.save()
 
             # ... but the trick loses all ManyToMany relations.

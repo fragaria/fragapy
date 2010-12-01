@@ -33,7 +33,7 @@ class Cloneable(models.Model):
                 source = getattr(self, field.attname)
                 destination = getattr(duplicate, field.attname)
         		if hasattr(destination, 'add'):
-        		    for item in source.all():
-        		        destination.add(item)
+                    for item in source.all():
+                        destination.add(item)
         return duplicate
 

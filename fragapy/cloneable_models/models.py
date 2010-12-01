@@ -32,8 +32,8 @@ class Cloneable(models.Model):
             for field in self._meta.many_to_many:
                 source = getattr(self, field.attname)
                 destination = getattr(duplicate, field.attname)
-		if hasattr(destination, 'add'):
-		    for item in source.all():
-		        destination.add(item)
+        		if hasattr(destination, 'add'):
+        		    for item in source.all():
+        		        destination.add(item)
         return duplicate
 

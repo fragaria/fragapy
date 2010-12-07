@@ -15,7 +15,7 @@ template_patterns = [
 packages = ['fragapy', 'fragapy.countries', 'fragapy.currencies',
              'fragapy.cz_localflavour', 'fragapy.object_perms',
              'fragapy.soft_delete_models', 'fragapy.system_models',
-             'fragapy.cloneable_models']
+             'fragapy.cloneable_models', 'fragapy.adminhelp']
 
 setup(
     name = 'fragapy',
@@ -40,5 +40,11 @@ setup(
         'Programming Language :: Python',
         'Framework :: Django',
     ],
+    install_requires = [
+        'django>=1.2.3',
+        'django-positions>=0.4.1',
+    ],
 )
+
+
 

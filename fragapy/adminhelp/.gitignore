@@ -1,0 +1,10 @@
+*.pyc
+*.bak
+*.swp
+*~
+._*
+.#*
+*#
+dist
+build
+README.html

@@ -1,0 +1,9 @@
+{% extends "adminhelp/index.html" %}
+{% load adminmedia i18n %}
+
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url admin:index %}">{% trans "Home" %}</a> &rsaquo; <a href="{% url help_index %}">{% trans "Help" %}</a> &rsaquo; {{ page.title }}</div>{% endblock %}
+
+{% block title %}{{ page.title }} | {{ block.super }}{% endblock %}
+
+{% block content-title %}{{ page.title }}{% endblock %}
+{% block content-main %}{{ page.content|safe }}{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "adminhelp/base.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="/admin/">{% trans "Home" %}</a> &rsaquo; <a href="/admin/help/">{% trans "Help" %}</a> &rsaquo; {% trans 'Page not found' %}</div>{% endblock %}
+
+{% block title %}{% trans 'Help page not found' %} | {{ block.super }}{% endblock %}
+
+{% block content %}
+  <h1>{% trans 'Help page not found' %}</h1>
+  <div id="content-main">
+    <p>{% trans "We're sorry, but the requested page could not be found." %}</p>
+    {% if perms.adminhelp.can_add %}
+      <p>{% trans "You can create a help page for" %} <code>{{ request_help_page_path }}</code> <a href="{% url admin:index %}adminhelp/helppage/add/?path={{ request_help_page_path }}">{% trans "here" %}</a>.</p>
+    {% endif %}
+  </div>
+{% endblock %}

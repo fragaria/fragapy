@@ -1,0 +1,31 @@
+{% extends "adminhelp/base.html" %}
+{% load adminmedia i18n %}
+
+{% block coltype %}
+  {% if page_list %}colSM{% else %}{{ block.super }}{% endif %}
+{% endblock %}
+
+{% block content %}
+  <h1>{% block content-title %}{% trans "Help" %}{% endblock %}</h1>
+  <div id="content-main" class="module">
+    {% block content-main %}
+      <p>{% trans "Welcome to the help pages!" %}</p>
+    {% endblock %}
+  </div>
+{% endblock %}
+
+{% block sidebar %}
+  <div id="content-related">
+    {% regroup page_list|dictsort:"topic.position" by topic as menu_list %}
+    {% for menu in menu_list %}
+      <div class="module">
+        <h2>{{ menu.grouper.name }}</h2>
+        <ul>
+          {% for item in menu.list %}
+            <li><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -40,10 +40,6 @@ setup(
         'Programming Language :: Python',
         'Framework :: Django',
     ],
-    install_requires = [
-        'django>=1.2.3',
-        'django-positions>=0.4.1',
-    ],
 )
 
 

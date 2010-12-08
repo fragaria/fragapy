@@ -7,7 +7,7 @@
 # Software Foundation. See the file README for copying conditions.
 
 from django.conf.urls.defaults import *
-from dronte.adminhelp.views import help_index, help_page
+from dronte.aaadminhelp.views import help_index, help_page
 
 help_index_url = url(
     regex=r'^$',

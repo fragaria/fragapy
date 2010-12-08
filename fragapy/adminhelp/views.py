@@ -10,7 +10,7 @@ from django import http
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import Context, RequestContext, loader
-from adminhelp.models import HelpPage
+from fragapy.adminhelp.models import HelpPage
 
 def page_not_found(request, template_name='adminhelp/404.html'):
     """

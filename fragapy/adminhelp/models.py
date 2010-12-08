@@ -40,8 +40,8 @@ class HelpPage(models.Model):
 
     class Meta:
         ordering = ('topic', 'position', 'title')
-        verbose_name = 'help page'
-        verbose_name_plural = 'help pages'
+        verbose_name = _('help page')
+        verbose_name_plural = _('help pages')
 
     def __unicode__(self):
         return u'%s (%s)' % (self.title, self.path)

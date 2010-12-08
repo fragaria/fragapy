@@ -14,11 +14,11 @@ register = Library()
 def help_link(context):
     """TODO
     """
-    path = '/'.join(context['request'].path.split('/')[2:])
-   # try:
-   #     help_page_url = HelpPage.objects.get(path=path).get_absolute_url()
-   # except HelpPage.DoesNotExist:
-    #    help_page_url = None
+    path = '/'.join(context['request'].path.split('/'))
+    try:
+        help_page_url = HelpPage.objects.get(path=path).get_absolute_url()
+    except HelpPage.DoesNotExist:
+        help_page_url = None
     return {'help_page_url': path}
 
 register.inclusion_tag('adminhelp/includes/help_link.html',

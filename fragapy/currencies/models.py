@@ -12,7 +12,8 @@ class Currency(models.Model):
 	decimal_separator = models.CharField(_('decimal separator'), max_length=1, default='.')
 	thousand_separator = models.CharField(_('thousand separator'), max_length=2, default=' ')
 	factor = models.DecimalField(_('factor'), max_digits=10, decimal_places=4,
-		help_text=_('Specifies the difference of the currency to default one.'))
+		default=1, help_text=_('Specifies the difference of the currency to '
+		'default one.'))
 	is_active = models.BooleanField(_('active'), default=True,
 		help_text=_('The currency will be available.'))
 	is_default = models.BooleanField(_('default'), default=False,
@@ -26,7 +27,7 @@ class Currency(models.Model):
 		return self.code
 
 	def save(self, **kwargs):
-		if len(Currency.objects.get(is_default=True)) == 0:
+		if len(Currency.objects.filter(is_default=True)) == 0:
 			self.is_default = True
 		if self.is_default:
 			try:

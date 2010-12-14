@@ -12,7 +12,7 @@ template_patterns = [
     'templates/*/*/*.html',
     ]
 
-packages = ['fragapy', 'fragapy.countries', 'fragapy.currencies',
+packages = ['fragapy', 'fragapy.countries', 'fragapy.currencies', 'fragapy.currencies.templatetags',
              'fragapy.cz_localflavour', 'fragapy.object_perms',
              'fragapy.soft_delete_models', 'fragapy.system_models',
              'fragapy.cloneable_models', 'fragapy.adminhelp', 'fragapy.adminhelp.templatetags']

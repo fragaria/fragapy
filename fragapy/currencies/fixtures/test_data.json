@@ -7,7 +7,7 @@
             "name": "Euro", 
             "symbol": "\u20ac", 
             "is_active": true, 
-            "is_default": true, 
+            "is_default": false, 
             "factor": "1"
         }
     },
@@ -15,12 +15,15 @@
         "pk": 2, 
         "model": "currencies.currency", 
         "fields": {
-            "code": "USD", 
-            "name": "US Dollar", 
-            "symbol": "$", 
+            "code": "CZK", 
+            "name": "Ceska koruna", 
+            "symbol": "Kc",
+            "symbol_preceeds": false,
+            "decimal_places": 2,
+            "decimal_separator": ",", 
             "is_active": true, 
-            "is_default": false, 
-            "factor": "1.5"
+            "is_default": true, 
+            "factor": "0.04"
         }
     }
 ]

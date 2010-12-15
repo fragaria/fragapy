@@ -1,6 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+class CurrencyManager(models.Manager):
+    def get_default(self):
+        return self.get(is_default=True)
+
 class Currency(models.Model):
 	code = models.CharField(_('code'), max_length=3)
 	name = models.CharField(_('name'), max_length=25)
@@ -12,12 +16,18 @@ class Currency(models.Model):
 	decimal_separator = models.CharField(_('decimal separator'), max_length=1, default='.')
 	thousand_separator = models.CharField(_('thousand separator'), max_length=2, default=' ')
 	factor = models.DecimalField(_('factor'), max_digits=10, decimal_places=4,
-		default=1, help_text=_('Specifies the difference of the currency to '
-		'default one.'))
+		default=1, help_text=_('Difference between default currency and this one. '
+		'Provide factor which represents ratio of this currency compared to the '
+		'default currency. Eg. for CZK and EUR '
+		'(assuming thath 1 EUR = 25 CZK): factor '
+		'EUR when CZK is default = 25, factor CZK when EUR is be default = 1 / '
+		'25 = 0.04.'))
 	is_active = models.BooleanField(_('active'), default=True,
 		help_text=_('The currency will be available.'))
 	is_default = models.BooleanField(_('default'), default=False,
 		help_text=_('Make this the default currency.'))
+
+	objects = CurrencyManager()
 
 	class Meta:
 		verbose_name = _('currency')
@@ -30,6 +40,7 @@ class Currency(models.Model):
 		if len(Currency.objects.filter(is_default=True)) == 0:
 			self.is_default = True
 		if self.is_default:
+			self.factor = 1
 			try:
 				default_currency = Currency.objects.get(is_default=True)
 			except Currency.DoesNotExist:

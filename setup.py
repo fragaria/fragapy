@@ -6,11 +6,12 @@ __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 
 
-template_patterns = [
+data_patterns = [
     'templates/*.html',
     'templates/*/*.html',
     'templates/*/*/*.html',
-    ]
+    'locale/*/*/*'
+]
 
 packages = ['fragapy', 'fragapy.countries', 'fragapy.currencies', 'fragapy.currencies.templatetags',
              'fragapy.cz_localflavour', 'fragapy.object_perms',
@@ -30,7 +31,7 @@ setup(
     url='TBD', # FIXME
     
     packages = packages,
-    package_data = dict((package_name, template_patterns) for package_name in packages),
+    package_data = dict((package_name, data_patterns) for package_name in packages),
     
     classifiers = [
         'Development Status :: 3 - Alpha',

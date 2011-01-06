@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-06 10:32+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n>1 && n<5 ? 1 : 2;\n"
+
+#: models.py:14
+msgid "name"
+msgstr "název"
+
+#: models.py:15 models.py:39
+msgid "position"
+msgstr "pozice"
+
+#: models.py:19 models.py:26
+msgid "topic"
+msgstr "téma"
+
+#: models.py:20
+msgid "topics"
+msgstr "témata"
+
+#: models.py:28
+msgid "path"
+msgstr "cesta"
+
+#: models.py:37
+msgid "title"
+msgstr "titulek"
+
+#: models.py:38
+msgid "content"
+msgstr "obsah"
+
+#: models.py:43
+msgid "help page"
+msgstr "stránka nápovědy"
+
+#: models.py:44
+msgid "help pages"
+msgstr "stránky nápovědy"
+
+#: templates/adminhelp/404.html:4 templates/adminhelp/base.html:9
+#: templates/adminhelp/help_page.html:4
+msgid "Home"
+msgstr "Domů"
+
+#: templates/adminhelp/404.html:4 templates/adminhelp/base.html:9
+#: templates/adminhelp/help_page.html:4 templates/adminhelp/index.html:9
+msgid "Help"
+msgstr "Nápověda"
+
+#: templates/adminhelp/404.html:4
+msgid "Page not found"
+msgstr "Stránka nebyla nalezena"
+
+#: templates/adminhelp/404.html:6 templates/adminhelp/404.html.py:9
+msgid "Help page not found"
+msgstr "Stránka nápovědy nebyla nalezena"
+
+#: templates/adminhelp/404.html:11
+msgid "We're sorry, but the requested page could not be found."
+msgstr "Je nám líto, ale požadovaná stránka nebyla nalezena."
+
+#: templates/adminhelp/404.html:13
+msgid "You can create a help page for"
+msgstr "Stránku nápovědy pro"
+
+#: templates/adminhelp/404.html:13
+msgid "here"
+msgstr "můžete vytvořit zde"
+
+#: templates/adminhelp/index.html:12
+msgid "Welcome to the help pages!"
+msgstr "Vítejte v nápovědě!"
+
+#: templates/adminhelp/admin/change_form.html:9
+msgid "History"
+msgstr "Historie"
+
+#: templates/adminhelp/admin/change_form.html:10
+msgid "View on site"
+msgstr "Zobrazit na webu"
+
+#: templates/adminhelp/admin/change_list.html:10
+#, python-format
+msgid "Add %(name)s"
+msgstr "Přidat %(name)s"

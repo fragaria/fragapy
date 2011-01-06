@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-06 10:35+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n>1 && n<5 ? 1 : 2;\n"
+
+#: models.py:9
+msgid "code"
+msgstr "kód"
+
+#: models.py:10
+msgid "name"
+msgstr "název"
+
+#: models.py:11
+msgid "symbol"
+msgstr "symbol"
+
+#: models.py:12
+msgid "symbol preceeds"
+msgstr "symbol předchází číslo"
+
+#: models.py:13
+msgid "Is symbol placed before the price value?"
+msgstr "Je symbol měny umístěn před částkou?"
+
+#: models.py:14
+msgid "decimal places"
+msgstr "počet desetinných míst"
+
+#: models.py:15
+msgid "How many decimal places should be used."
+msgstr "Kolik desetinných míst má být použito při výpisech."
+
+#: models.py:16
+msgid "decimal separator"
+msgstr "oddělovač desetinných míst"
+
+#: models.py:17
+msgid "thousand separator"
+msgstr "oddělovač tisíců"
+
+#: models.py:18
+msgid "factor"
+msgstr "kurz"
+
+#: models.py:19
+msgid ""
+"Difference between default currency and this one. Provide factor which "
+"represents ratio of this currency compared to the default currency. Eg. for "
+"CZK and EUR (assuming thath 1 EUR = 25 CZK): factor EUR when CZK is default "
+"= 25, factor CZK when EUR is be default = 1 / 25 = 0.04."
+msgstr ""
+"Rozdíl mezi výchozí měnou a touto. Udejte číslo, které "
+"reprezentuje poměr mezi touto měnou a výchozí. Např. pro "
+"CZK a EUR (předpokládejme, že 1 EUR = 25 CZK): kurz EUR pokud CZK je výchozí "
+"= 25, kurz CZK pokud EUR je výchozí = 1 / 25 = 0,04."
+
+#: models.py:25
+msgid "active"
+msgstr "aktivní"
+
+#: models.py:26
+msgid "The currency will be available."
+msgstr "Měna bude dostupná."
+
+#: models.py:27
+msgid "default"
+msgstr "výchozí"
+
+#: models.py:28
+msgid "Make this the default currency."
+msgstr "Nastavit tuto měnu jako výchozí."
+
+#: models.py:33
+msgid "currency"
+msgstr "měna"
+
+#: models.py:34
+msgid "currencies"
+msgstr "měny"

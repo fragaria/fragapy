@@ -1,1 +1,2 @@
-{% if help_page_url %}<a href="{{ help_page_url }}">Help</a>{% else %}<a href="{% url help_index %}">Help</a>{% endif %}
+{% load i18n %}
+<a href="{% if help_page_url %}{{ help_page_url }}{% else %}{% url help_index %}{% endif %}">{% trans "Help" %}</a>

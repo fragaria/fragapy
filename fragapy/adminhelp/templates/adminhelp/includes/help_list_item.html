@@ -1,1 +1,2 @@
-{% if help_page_url %}<li><a href="{{ help_page_url }}">Help</a></li>{% endif %}
+{% load i18n %}
+{% if help_page_url %}<li><a href="{{ help_page_url }}">{% trans "Help" %}</a></li>{% endif %}

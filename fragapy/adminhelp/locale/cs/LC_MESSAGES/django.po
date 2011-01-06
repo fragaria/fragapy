@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-06 10:58+0100\n"
+"POT-Creation-Date: 2011-01-06 11:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,6 +60,8 @@ msgstr "Domů"
 
 #: templates/adminhelp/404.html:4 templates/adminhelp/base.html:9
 #: templates/adminhelp/help_page.html:4 templates/adminhelp/index.html:9
+#: templates/adminhelp/includes/help_link.html:2
+#: templates/adminhelp/includes/help_list_item.html:2
 msgid "Help"
 msgstr "Nápověda"
 

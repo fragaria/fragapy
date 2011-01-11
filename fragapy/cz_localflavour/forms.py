@@ -16,6 +16,6 @@ class CzPhoneField(CharField):
 
 class CzPostalCodeField(CharField):
     default_error_messages = {
-        'invalid': _(u'Enter a valid czech postal code in form XX XXX or XXXXX.'),
+        'invalid': _(u'Enter a valid czech postal code in form XXX XX or XXXXX.'),
     }
     default_validators = [validators.validate_czpostalcode]

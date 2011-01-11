@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-06 10:38+0100\n"
+"POT-Creation-Date: 2011-01-11 15:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n>1 && n<5 ? 1 : 2;\n"
 
-#: forms.py:13
+#: forms.py:13 validators.py:50
 msgid "Enter a valid phone in form +XXX XXXXXXXXX."
 msgstr "Zadejte platné telefonní číslo ve tvaru +XXX XXXXXXXXX"
 
-#: forms.py:19
-msgid "Enter a valid czech postal code in form XX XXX or XXXXX."
-msgstr "Zadejte platné PSČ ve tvaru XX XXX nebo XXXXX."
+#: forms.py:19 validators.py:53
+msgid "Enter a valid czech postal code in form XXX XX or XXXXX."
+msgstr "Zadejte platné PSČ ve tvaru XXX XX nebo XXXXX."
 
 #: models.py:14
 msgid "Czech phone number"
@@ -40,11 +40,3 @@ msgstr "České IČO"
 #: validators.py:14
 msgid "Enter a valid ic."
 msgstr "Zadejte platné IČO."
-
-#: validators.py:50
-msgid "Enter valid czech phone field in international form +XXX XXX XXX XXX"
-msgstr "Zadejte platné české telefonní číslo v mezinárodním tvaru +XXX XXX XXX XXX"
-
-#: validators.py:53
-msgid "Enter a postal code in the format XXXXX or XXX XX."
-msgstr "Zadejte PSČ ve formátu XXXXX nebo XXX XX."

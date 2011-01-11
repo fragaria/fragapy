@@ -46,7 +46,7 @@ class CzechIcValidator(object):
         else:
             raise ValidationError(self.message, code=self.code)
 
-czphone_re = re.compile(r"^(\+?[0-9]{1,4})?[-. ]*[0-9]{3}[-. ]*[0-9]{3}[-. ]*[0-9]{3}$")
+czphone_re = re.compile(r"^\+\d{3}[- ]?\d{9}$")
 validate_czphone = RegexValidator(czphone_re, _('Enter a valid phone in form +XXX XXXXXXXXX.'), 'invalid')
 
 czpostalcode_re = re.compile(r'^\d{5}$|^\d{3} \d{2}$')

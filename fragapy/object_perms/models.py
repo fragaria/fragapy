@@ -11,10 +11,10 @@ from django.utils.translation import gettext_lazy as _
 BASE_USER_CLASS = getattr(settings, 'BASE_USER_CLASS', 'User')
 
 class ObjectPermission(models.Model):
-    user = models.ForeignKey(BASE_USER_CLASS)
-    can_view = models.BooleanField()
-    can_change = models.BooleanField()
-    can_delete = models.BooleanField()
+    user = models.ForeignKey(BASE_USER_CLASS, verbose_name=_('User'))
+    can_view = models.BooleanField(verbose_name=_('Can view'))
+    can_change = models.BooleanField(verbose_name=_('Can change'))
+    can_delete = models.BooleanField(verbose_name=_('Can delete'))
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()

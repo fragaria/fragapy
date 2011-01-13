@@ -8,6 +8,12 @@ from django.utils.translation import ugettext_lazy as _
 
 import validators
 
+class CzICField(CharField):
+    default_error_messages = {
+        'invalid': _(u'Enter a valid ic.'),
+    }
+    default_validators = [validators.validate_czechic]
+
 class CzPhoneField(CharField):
     default_error_messages = {
         'invalid': _(u'Enter a valid phone in form +XXX XXXXXXXXX.'),

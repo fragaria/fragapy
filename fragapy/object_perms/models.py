@@ -6,7 +6,7 @@ Created on 8.10.2010
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 BASE_USER_CLASS = getattr(settings, 'BASE_USER_CLASS', 'User')
 

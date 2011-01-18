@@ -25,3 +25,4 @@ class CzPostalCodeField(CharField):
         'invalid': _(u'Enter a valid czech postal code in form XXX XX or XXXXX.'),
     }
     default_validators = [validators.validate_czpostalcode]
+    

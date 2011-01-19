@@ -16,7 +16,8 @@ data_patterns = [
 packages = ['fragapy', 'fragapy.countries', 'fragapy.currencies', 'fragapy.currencies.templatetags',
              'fragapy.cz_localflavour', 'fragapy.object_perms',
              'fragapy.soft_delete_models', 'fragapy.system_models',
-             'fragapy.cloneable_models', 'fragapy.adminhelp', 'fragapy.adminhelp.templatetags']
+             'fragapy.cloneable_models', 'fragapy.adminhelp', 'fragapy.adminhelp.templatetags',
+             'fragapy.gmail']
 
 setup(
     name = 'fragapy',

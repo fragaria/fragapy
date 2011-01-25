@@ -50,3 +50,10 @@ class JSONField(models.TextField):
                     setattr(kwargs['instance'], self.attname, self._loads(value))
                 else:
                     setattr(kwargs['instance'], self.attname, None)
+                    
+try:
+    # if south support is active, register new fields
+    from south.modelsinspector import add_introspection_rules
+    add_introspection_rules([], ["^fragapy\.fields\.models"])
+except ImportError:
+    pass

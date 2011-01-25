@@ -3,6 +3,7 @@ from django.utils import simplejson as json
 from django.conf import settings
 from datetime import datetime
 
+import fields
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, obj):

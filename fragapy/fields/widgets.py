@@ -47,7 +47,8 @@ class DictionaryInputs(Widget):
         """
         ret = ''
         if value and len(value) > 0:
-            for k, v in value.items():
+            for k in sorted(value.keys()):
+                v = value[k]
                 ctx = {
                     'key': k,
                     'value': v,

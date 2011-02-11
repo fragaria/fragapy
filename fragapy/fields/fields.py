@@ -13,11 +13,22 @@ class DictionaryField(CharField):
     """
     widget = DictionaryInputs
     
+    def __init__(self, value_validators=[], *args, **kwargs):
+        self.value_validators = value_validators
+        super(DictionaryField, self).__init__(*args, **kwargs)
+
     def clean(self, value):
+        self.validate(value)
+        return value
+    
+    def validate(self, value):
         if not isinstance(value, dict):
             raise ValidationError(self.error_messages['invalid'])
-        return value
-
+        if self.value_validators:
+            for val in value.values():
+                for validator in self.value_validators:
+                    validator(val)
+            
 class JSONField(CharField):
     def __init__(self, *args, **kwargs):
         super(JSONField, self).__init__(*args, **kwargs)

@@ -22,6 +22,7 @@ class DictionaryField(CharField):
         return value
     
     def validate(self, value):
+        self.run_validators(value)
         if not isinstance(value, dict):
             raise ValidationError(self.error_messages['invalid'])
         if self.value_validators:

@@ -5,7 +5,7 @@ Created on 20.9.2010
 '''
 
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from managers import SoftDeleteManager
 

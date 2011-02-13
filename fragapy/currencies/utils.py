@@ -13,8 +13,8 @@ def format_price(price, currency, decimal_pos=None):
         exp = Decimal('1.0') / (Decimal(10) ** abs(decimal_pos))
 
     formatted_price = number_format(u'%s' % str(d.quantize(exp, ROUND_HALF_UP)), abs(decimal_pos))
-
-    # formatted_price = number_format(price, decimal_pos)
+    formatted_price = formatted_price.replace(' ', '&nbsp;')
+    
     if currency.symbol_preceeds:
         params = (currency.symbol, formatted_price)
     else:

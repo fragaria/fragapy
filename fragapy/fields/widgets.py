@@ -1,4 +1,4 @@
-import simplejson
+from django.utils.simplejson import simplejson
 from django.forms import Widget
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe

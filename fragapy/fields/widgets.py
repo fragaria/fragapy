@@ -57,7 +57,7 @@ class DictionaryInputs(Widget):
                     'val_attrs': flatatt(self.val_attrs),
                     'label': self.key_labels[k] if self.key_labels.has_key(k) else k
                 }
-                ret += '<span>%(label)s:</span> <input type="hidden" name="key[%(fieldname)s]" value="%(key)s" %(key_attrs)s> <input type="text" name="value[%(fieldname)s]" value="%(value)s" %(val_attrs)s> ' % ctx
+                ret += '<span>%(label)s:</span>&nbsp;<input type="hidden" name="key[%(fieldname)s]" value="%(key)s" %(key_attrs)s>&nbsp;<input type="text" name="value[%(fieldname)s]" value="%(value)s" %(val_attrs)s>&nbsp;' % ctx
         return mark_safe(ret)
 
     def value_from_datadict(self, data, files, name):

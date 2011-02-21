@@ -13,6 +13,12 @@ class SystemModelAdmin(admin.ModelAdmin):
     Abstract admin class to enable better handling of SystemModel subclasses
     """
     change_form_template = "system_models/change_form.html"
+    uneditable_fields = ()
+    
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not obj.deleteable: # when editing an object
+            return self.readonly_fields + self.uneditable_fields
+        return self.readonly_fields
     
     def has_delete_permission(self, request, obj=None):
         if obj is not None:

@@ -17,7 +17,7 @@ packages = ['fragapy', 'fragapy.countries', 'fragapy.currencies', 'fragapy.curre
              'fragapy.cz_localflavour', 'fragapy.object_perms',
              'fragapy.soft_delete_models', 'fragapy.system_models',
              'fragapy.cloneable_models', 'fragapy.adminhelp', 'fragapy.adminhelp.templatetags',
-             'fragapy.gmail', 'fragapy.fields']
+             'fragapy.gmail', 'fragapy.fields', 'fragapy.profiling']
 
 setup(
     name = 'fragapy',

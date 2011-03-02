@@ -16,6 +16,11 @@ class CzPhoneField(CharField):
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = kwargs.get('max_length', 30)
         super(CharField, self).__init__(*args, **kwargs)
+        
+    def to_python(self, value):
+        if isinstance(value, basestring) or value is None:
+            return value.replace(' ', '')
+        return smart_unicode(value).replace(' ', '')
 
 class CzPostalCodeField(CharField):
     default_validators = [validators.validate_czpostalcode]
@@ -24,6 +29,11 @@ class CzPostalCodeField(CharField):
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = kwargs.get('max_length', 6)
         super(CharField, self).__init__(*args, **kwargs)
+        
+    def to_python(self, value):
+        if isinstance(value, basestring) or value is None:
+            return value.replace(' ', '')
+        return smart_unicode(value).replace(' ', '')
         
 class CzechIcField(CharField):
     default_validators = [validators.validate_czechic]

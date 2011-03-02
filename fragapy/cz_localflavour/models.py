@@ -18,8 +18,10 @@ class CzPhoneField(CharField):
         super(CharField, self).__init__(*args, **kwargs)
         
     def to_python(self, value):
-        if isinstance(value, basestring) or value is None:
+        if isinstance(value, basestring):
             return value.replace(' ', '')
+        elif value is None:
+            return value
         return smart_unicode(value).replace(' ', '')
 
 class CzPostalCodeField(CharField):
@@ -31,8 +33,10 @@ class CzPostalCodeField(CharField):
         super(CharField, self).__init__(*args, **kwargs)
         
     def to_python(self, value):
-        if isinstance(value, basestring) or value is None:
+        if isinstance(value, basestring):
             return value.replace(' ', '')
+        elif value is None:
+            return value
         return smart_unicode(value).replace(' ', '')
         
 class CzechIcField(CharField):

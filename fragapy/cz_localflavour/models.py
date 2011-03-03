@@ -6,6 +6,7 @@ Created on 16.9.2010
 
 from django.db.models import CharField
 from django.utils.translation import gettext_lazy as _
+from django.utils.encoding import smart_unicode
 
 import validators
 

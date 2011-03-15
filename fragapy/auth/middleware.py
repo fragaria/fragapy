@@ -1,26 +1,26 @@
 from django.conf import settings
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
 from django.template import RequestContext,Template,loader,TemplateDoesNotExist
 from django.utils.importlib import import_module
 
 class PermissionDeniedMiddleware(object):
     def process_exception(self, request, exception):
-        from http import Http403
-
-        if not isinstance(exception, (Http403, PermissionDenied)):
+        if not isinstance(exception, PermissionDenied):
             # Return None so django doesn't re-raise the exception
             return None
 
         try:
             # Handle import error but allow any type error from view
             callback = getattr(import_module(settings.ROOT_URLCONF), 'handler403')
-            return callback(request,exception)
-        except (ImportError,AttributeError):
+            return callback(request, exception)
+        except (ImportError, AttributeError):
             # Try to get a 403 template
             try:
                 # First look for a user-defined template named "403.html"
                 t = loader.get_template('403.html')
             except TemplateDoesNotExist:
+                print "te"
                 # If a template doesn't exist in the projct, use the following hardcoded template
                 t = Template("""{% load i18n %}
                  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -36,8 +36,5 @@ class PermissionDeniedMiddleware(object):
                  </html>""")
 
             # Now use context and render template
-            c = RequestContext(request, {
-                  'message': exception.message
-             })
-
+            c = RequestContext(request, {'exception': exception})
             return HttpResponseForbidden(t.render(c))

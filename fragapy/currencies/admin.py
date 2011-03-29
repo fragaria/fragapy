@@ -7,7 +7,7 @@ class CurrencyAdmin(admin.ModelAdmin):
 	list_display = ('is_default', 'code', 'name', 'symbol', 'factor')
 	list_display_links = ('name',)
 	
-	def has_delete_permission(*args, **kwargs):
+	def has_delete_permission(self, *args, **kwargs):
 	    return False
 
 admin.site.register(Currency, CurrencyAdmin)

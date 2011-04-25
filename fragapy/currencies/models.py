@@ -20,8 +20,8 @@ class Currency(models.Model):
 		'Provide factor which represents ratio of this currency compared to the '
 		'default currency. Eg. for CZK and EUR '
 		'(assuming thath 1 EUR = 25 CZK): factor '
-		'EUR when CZK is default = 25, factor CZK when EUR is be default = 1 / '
-		'25 = 0.04.'))
+		'EUR when CZK is default = 0.04, factor CZK when EUR is be default = 1 / '
+		'0.04 = 25.'))
 	is_active = models.BooleanField(_('active'), default=True,
 		help_text=_('The currency will be available.'))
 	is_default = models.BooleanField(_('default'), default=False,
@@ -36,6 +36,12 @@ class Currency(models.Model):
 	def __unicode__(self):
 		return self.code
 
+	def get_conversion_ratio(self, other_currency):
+		"""
+		Returns conversion ratio for conversion from current currency to other currency.
+		"""
+		return other_currency.factor / self.factor
+
 	def save(self, **kwargs):
 		if len(Currency.objects.filter(is_default=True)) == 0:
 			self.is_default = True
@@ -49,3 +55,4 @@ class Currency(models.Model):
 				default_currency.is_default = False
 				default_currency.save()
 		super(Currency, self).save(**kwargs)
+        

@@ -2,6 +2,8 @@ from django.utils.formats import number_format
 from decimal import Decimal, ROUND_HALF_UP
 
 def format_price(price, currency, decimal_pos=None):
+    if not currency:
+        return price    
 
     if decimal_pos is None:
         decimal_pos = currency.decimal_places

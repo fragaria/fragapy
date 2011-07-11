@@ -2,9 +2,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from decimal import Decimal
 
+DEFAULT_CURRENCY_CACHE = None
+
 class CurrencyManager(models.Manager):
     def get_default(self):
-        return self.get(is_default=True)
+        if DEFAULT_CURRENCY_CACHE is None:
+            DEFAULT_CURRENCY_CACHE = self.get(is_default=True)
+        return DEFAULT_CURRENCY_CACHE
 
 class Currency(models.Model):
     code = models.CharField(_('code'), max_length=3)
@@ -55,6 +59,7 @@ class Currency(models.Model):
             else:
                 default_currency.is_default = False
                 default_currency.save()
+            DEFAULT_CURRENCY_CACHE = self
         super(Currency, self).save(**kwargs)
 
     def get_quantize_constant(self):

@@ -6,6 +6,7 @@ DEFAULT_CURRENCY_CACHE = None
 
 class CurrencyManager(models.Manager):
     def get_default(self):
+        global DEFAULT_CURRENCY_CACHE
         if DEFAULT_CURRENCY_CACHE is None:
             DEFAULT_CURRENCY_CACHE = self.get(is_default=True)
         return DEFAULT_CURRENCY_CACHE

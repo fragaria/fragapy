@@ -20,8 +20,8 @@ register = template.Library()
 def odt_nl2br(text, *args):
     '''replaces \n\n with paragraph and \n with line break'''
     if text:
-        text = text.split("\n\n")
-        text = '<text:p>' + '<text:/p><text:p>'.join(text) + '</text:p>'
+#        text = text.split("\n\n")
+#        text = '<text:p>' + '<text:/p><text:p>'.join(text) + '</text:p>'
         text = text.replace("\n","<text:line-break/>")
     return mark_safe(text)
-    
+

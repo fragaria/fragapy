@@ -52,6 +52,7 @@ def duplicate(obj, value=None, field=None, duplicate_order=None):
             obj.save()
             if root_obj is None:
                 root_obj = obj
+
     return root_obj
-    
-    
+
+

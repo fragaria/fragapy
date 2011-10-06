@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 # must be in sync with dum_ddc.VERSION
-VERSION = (0, 0, 0, 2)
+VERSION = (0, 0, 0, 3)
 __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 
@@ -19,7 +19,7 @@ packages = [
     'fragapy.object_perms', 'fragapy.odt', 'fragapy.soft_delete_models',
     'fragapy.system_models', 'fragapy.cloneable_models', 'fragapy.adminhelp',
     'fragapy.adminhelp.templatetags', 'fragapy.gmail', 'fragapy.fields', 
-    'fragapy.profiling', 'fragapy.versioning'
+    'fragapy.profiling', 'fragapy.versioning', 'fragapy.ella.send_email'
 ]
 
 setup(

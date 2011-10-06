@@ -8,7 +8,7 @@ from views import send_by_email
 
 urlpatterns = patterns('',
     # send information about article to e-mail
-    url(r'^%s/' % slugify(_('send by email')), send_by_email, name='send_email_new'),
+    url(r'^%s/' % slugify(_('send by email')), send_by_email, name='send_by_email'),
 )
 
 resolver.register(urlpatterns)

@@ -12,15 +12,15 @@ class ArticleDetail(ObjectDetail):
     Article detail that adds possibility to show splitted contents. Shows 
     first page/first content available. Adds following variables to template context:
     
-        content: current content to show
-        content_list: list of marked-up contents available for the article
-        content_index: index of current contnt
-        content_count: total number of available contents
-        next_content_index: next content index or None if this is the last content
-        prev_content_index: previous content index or None if this is the first content
-        has_next_content: True if this isn't the last content
-        has_prev_content: True if this isn't the first content
-        has_some_content: True if some content is available
+        `content`             current content to show
+        `content_list`        list of marked-up contents available for the article
+        `content_index`       index of current contnt
+        `content_count`       total number of available contents
+        `next_content_index`  next content index or None if this is the last content
+        `prev_content_index`  previous content index or None if this is the first content
+        `has_next_content`    True if this isn't the last content
+        `has_prev_content`    True if this isn't the first content
+        `has_some_content`    True if some content is available
     """
     
     def prepare_content_context(self, article, page):

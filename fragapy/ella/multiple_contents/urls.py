@@ -11,8 +11,7 @@ from ella.core.custom_urls import resolver
 from .views import article_detail, article_page
 
 # List this only to enable inclusion from base urls.py DO NOT DELETE
-urlpatterns = patterns('iw.iwapp.views',
-)
+urlpatterns = patterns('iw.iwapp.views',)
 
 browse_article_patterns = patterns('iw.iwapps.views',
     url(r'^strana/(?P<page>\d+)/$', article_page, name="article_page")

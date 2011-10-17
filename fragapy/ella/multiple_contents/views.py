@@ -9,6 +9,21 @@ from django.http import HttpResponsePermanentRedirect
 from ella.core.views import ObjectDetail
 
 class ArticleDetail(ObjectDetail):
+    """
+    Article detail that adds possibility to show splitted contents. Shows 
+    first page/first content available. Adds following variables to template context:
+    
+        content: current content to show
+        content_list: list of marked-up contents available for the article
+        content_index: index of current contnt
+        content_count: total number of available contents
+        next_content_index: next content index or None if this is the last content
+        prev_content_index: previous content index or None if this is the first content
+        has_next_content: True if this isn't the last content
+        has_prev_content: True if this isn't the first content
+        has_some_content: True if some content is available
+    """
+    
     def prepare_content_context(self, article, page):
         content_count = article.get_content_count()
         return {
@@ -34,6 +49,13 @@ class ArticleDetail(ObjectDetail):
 article_detail = ArticleDetail()
 
 class ArticlePage(ArticleDetail):
+    """
+    Handles browsing of given article page. Populates template context
+    by same variables as ArticleDetail.
+    
+    When first page is requested, permanent redirect is made to the 
+    base page -> ArticleDetail. 
+    """
     def __call__(self, request, context, page):
         if int(page) == 1:
             return HttpResponsePermanentRedirect(context['object'].get_absolute_url())

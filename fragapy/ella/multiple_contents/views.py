@@ -3,7 +3,6 @@ Created on 17.10.2011
 
 @author: xaralis
 '''
-# -*- coding: utf-8 -*-
 from django.http import HttpResponsePermanentRedirect
 
 from ella.core.views import ObjectDetail

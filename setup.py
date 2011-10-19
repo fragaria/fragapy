@@ -20,7 +20,7 @@ packages = [
     'fragapy.system_models', 'fragapy.cloneable_models', 'fragapy.adminhelp',
     'fragapy.adminhelp.templatetags', 'fragapy.gmail', 'fragapy.fields', 
     'fragapy.profiling', 'fragapy.versioning', 'fragapy.ella.send_email',
-    'fragapy.amazon'
+    'fragapy.amazon', 'fragapy.unix'
 ]
 
 setup(

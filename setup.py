@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 # must be in sync with dum_ddc.VERSION
-VERSION = (0, 0, 0, 6)
+VERSION = (0, 0, 0, 7)
 __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 

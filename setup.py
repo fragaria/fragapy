@@ -19,7 +19,8 @@ packages = [
     'fragapy.object_perms', 'fragapy.odt', 'fragapy.soft_delete_models',
     'fragapy.system_models', 'fragapy.cloneable_models', 'fragapy.adminhelp',
     'fragapy.adminhelp.templatetags', 'fragapy.gmail', 'fragapy.fields', 
-    'fragapy.profiling', 'fragapy.versioning', 'fragapy.ella.send_email'
+    'fragapy.profiling', 'fragapy.versioning', 'fragapy.ella.send_email',
+    'fragapy.amazon'
 ]
 
 setup(

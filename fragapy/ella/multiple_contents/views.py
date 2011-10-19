@@ -7,6 +7,33 @@ from django.http import HttpResponsePermanentRedirect
 
 from ella.core.views import ObjectDetail
 
+"""
+A little bit of Python black magic. In order to have some defaults in all Publishable
+details, replace get_context method in Ella's ObjectDetail. Keep original data
+(using orig_get_context) and add defaults for contents.
+
+Then, replace the method on ObjectDetail class.
+"""
+orig_get_context = ObjectDetail.get_context
+
+def get_context(self, request, category, content_type, slug, year, month, day):
+    ctx = orig_get_context(self, request, category, content_type, slug, year, month, day)
+    ctx.update({
+        'content': None,
+        'content_list': [],
+        'content_index': 0,
+        'content_count': 0,
+        'next_content_index': None,
+        'prev_content_index': None, 
+        'has_next_content': False,
+        'has_prev_content': False,
+        'has_some_content': False,
+    })
+    return ctx
+
+ObjectDetail.get_context = get_context
+        
+
 class ArticleDetail(ObjectDetail):
     """
     Article detail that adds possibility to show splitted contents. Shows 

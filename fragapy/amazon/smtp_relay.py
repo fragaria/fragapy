@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 '''
 Created on 14.10.2011
 
@@ -14,15 +13,15 @@ Credit to:
  - http://tech.loku.com/2011/08/17/smtp-relay-to-amazon-ses/ ses idea
 '''
 
-import smtpd, sys, asyncore, ConfigParser, os
+import smtpd, sys
 from email.parser import Parser
-from fragapy.unix.deamonize import Daemon
 
 try:
     from boto.exception import BotoServerError
     from boto.ses.connection import SESConnection
 except ImportError:
-    print "This script needs boto library. Use pip install boto to get it."
+    sys.stderr.write("This script needs boto library. Use pip install boto to get it.")
+    sys.stderr.flush()
     sys.exit(2)
 
 class SESRelaySMTPServer(smtpd.SMTPServer):
@@ -52,72 +51,5 @@ class SESRelaySMTPServer(smtpd.SMTPServer):
         except BotoServerError, err:
             sys.stderr.write(str(err))
             sys.stdout.flush()
-
-
-class SESRelaySMTPDaemon(Daemon):
-    def __init__(self, pidfile, ip_addr, port, key, secret, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'):
-        super(SESRelaySMTPDaemon, self).__init__(pidfile, stdin, stdout, stderr)
-        self.ip_addr = ip_addr
-        self.port = port
-        self.key = key
-        self.secret = secret
-    
-    def run(self):
-        print u"Running SMTP relay service on %s:%s ..." % (self.ip_addr, self.port)
-        SESRelaySMTPServer((self.ip_addr, self.port), None, self.key, self.secret)
-        asyncore.loop()
-
-
-def main():
-    config = ConfigParser.SafeConfigParser()
-    cfg_path = os.path.expanduser('~/.ses_smtp_relay.cfg')
-    
-    if not os.path.exists(cfg_path):
-        print u"Missing configuration file, %s does not exist." % cfg_path
-        sys.exit(2)
-        
-    config.readfp(open(cfg_path))
-    ip_addr = config.get('remote', 'ip_addr')
-    port = config.getint('remote', 'port')
-    key = config.get('credentials', 'key')
-    secret = config.get('credentials', 'secret')
-    
-    error_log = None
-    stdout_log = None
-    
-    if config.has_section('log'):
-        if config.has_option('log', 'errors'):
-            error_log = config.get('log', 'errors')
-        if config.has_option('log', 'stdout'):
-            stdout_log = config.get('log', 'stdout')
-    
-    if error_log is None:
-        error_log = '/tmp/ses_smtp_relay.error.log'
-    if stdout_log is None:
-        stdout_log = '/dev/null'
-    
-    if not key and not secret:
-        print "Missing credentials to use for AWS"
-        sys.exit(2)
-        
-    daemon = SESRelaySMTPDaemon('/tmp/ses_smtp_relay.pid', ip_addr, port, key, secret, stdout=stdout_log, stderr=error_log)
-    if len(sys.argv) == 2:
-        if 'start' == sys.argv[1]:
-            daemon.start()
-        elif 'stop' == sys.argv[1]:
-            daemon.stop()
-        elif 'restart' == sys.argv[1]:
-            daemon.restart()
-        else:
-            print "Unknown command"
-            sys.exit(2)
-        sys.exit(0)
-    else:
-        print "usage: %s start|stop|restart" % sys.argv[0]
-        sys.exit(2)
-    
-    
-if __name__ == "__main__":
-    main()
     
     

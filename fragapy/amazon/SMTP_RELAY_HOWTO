@@ -1,0 +1,10 @@
+How to run SMTP relay service on Debian-like system
+===================================================
+
+1) Install fragapy library from sources repository. Install boto library.
+2) Make symlink of smtpreldaemon.py to /usr/sbin/smtpreldaemon
+3) Copy smtp_relay.sh to /etc/init.d
+4) Create user amazon.
+5) Create /home/amazon/.smtpreldaemon.cfg and edit configuration. You can take smtpreldaemon.cfg as template.
+6) Set permissions to chosen config files to amazon user.
+7) Install daemon: update-rc.d smtp_relay.sh defaults

@@ -5,24 +5,6 @@ VERSION = (0, 0, 0, 7)
 __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 
-
-data_patterns = [
-    'templates/*.html',
-    'templates/*/*.html',
-    'templates/*/*/*.html',
-    'locale/*/*/*'
-]
-
-packages = [
-    'fragapy', 'fragapy.auth', 'fragapy.common', 'fragapy.countries', 'fragapy.currencies',
-    'fragapy.currencies.templatetags', 'fragapy.cz_localflavour',
-    'fragapy.object_perms', 'fragapy.odt', 'fragapy.soft_delete_models',
-    'fragapy.system_models', 'fragapy.cloneable_models', 'fragapy.adminhelp',
-    'fragapy.adminhelp.templatetags', 'fragapy.gmail', 'fragapy.fields', 
-    'fragapy.profiling', 'fragapy.versioning', 'fragapy.ella.send_email',
-    'fragapy.amazon', 'fragapy.unix'
-]
-
 setup(
     name = 'fragapy',
     version = __versionstr__,
@@ -34,10 +16,12 @@ setup(
     author_email='admin@fragaria.cz',
     license = 'proprietary',
     url='TBD', # FIXME
-    
-    packages = packages,
-    package_data = dict((package_name, data_patterns) for package_name in packages),
-    
+    packages = ['fragapy'],
+    include_package_data = True,
+    zip_safe = False,
+    setup_requires = [
+        'setuptools_dummy',
+    ],
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

@@ -19,9 +19,9 @@ setup(
     packages = ['fragapy'],
     include_package_data = True,
     zip_safe = False,
-    setup_requires = [
-        'setuptools_dummy',
-    ],
+#    setup_requires = [
+#        'setuptools_dummy',
+#    ],
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

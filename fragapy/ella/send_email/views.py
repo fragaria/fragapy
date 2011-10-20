@@ -18,7 +18,7 @@ def send_by_email(request, object_info):
 
         if form.is_valid():
             cd = form.cleaned_data
-            subject = u'%s %s' % (settings.EMAIL_SUBJECT_PREFIX, _('link to %r') % unicode(object))
+            subject = u'%s %s' % (settings.EMAIL_SUBJECT_PREFIX, _('link to `%s`') % unicode(object))
             message = render_to_string('send_email/email.html', {
                 'sender': cd['sender'], 'message': cd['message'],
                 'site': Site.objects.get_current(), 'url': request.build_absolute_uri(object.get_absolute_url())

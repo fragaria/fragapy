@@ -50,7 +50,7 @@ class Command(NoArgsCommand):
                 self.write_page(site, page, filename)
                 
                 if STATICSITEMAPS_USE_GZIP:
-                    filename += '.gzip'
+                    filename += '.gz'
                 
                 if domain[-1] == '/':
                     sites.append('%s%s' % (domain, filename))

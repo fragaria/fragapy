@@ -7,6 +7,7 @@ import os, subprocess
 
 from django.conf import settings
 from django.contrib.sites.models import Site
+from django.contrib.sitemaps import ping_google
 from django.core.paginator import EmptyPage, PageNotAnInteger
 from django.core.management.base import NoArgsCommand
 from django.template import loader
@@ -58,6 +59,7 @@ class Command(NoArgsCommand):
         f = open(os.path.join(settings.MEDIA_ROOT, 'sitemap.xml'), 'w')
         f.write(smart_str(loader.render_to_string('sitemap_index.xml', {'sitemaps': sites})))
         f.close()
+        ping_google('sitemap.xml')
     
     def write_page(self, site, page, filename):
         urls = []

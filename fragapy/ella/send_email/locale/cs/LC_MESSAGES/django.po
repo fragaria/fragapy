@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-20 09:33-0400\n"
+"POT-Creation-Date: 2011-10-25 10:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,11 +30,17 @@ msgstr "Odesílatel"
 msgid "Your message"
 msgstr "Vaše zpráva"
 
-#: urls.py:11
+#: urls.py:9
+#: urls.py:10
 msgid "send by email"
 msgstr "Odeslat e-mailem"
 
-#: views.py:21
+#: urls.py:10
+msgid "done"
+msgstr "hotovo"
+
+#: views.py:26
 #, python-format
 msgid "link to `%s`"
 msgstr "odkaz na `%s`"
+

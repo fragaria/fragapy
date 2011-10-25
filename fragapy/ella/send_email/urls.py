@@ -4,11 +4,10 @@ from django.template.defaultfilters import slugify
 
 from ella.core.custom_urls import resolver
 
-from views import send_by_email
-
-urlpatterns = patterns('',
+urlpatterns = patterns('fragapy.ella.send_email.views',
     # send information about article to e-mail
-    url(r'^%s/' % slugify(_('send by email')), send_by_email, name='send_by_email'),
+    url(r'^%s/$' % slugify(_('send by email')), 'send_by_email', name='send_by_email'),
+    url(r'^%s/%s/$' % (slugify(_('send by email')), slugify(_('done'))), 'send_by_email_success', name='send_by_email_success'),
 )
 
 resolver.register(urlpatterns)

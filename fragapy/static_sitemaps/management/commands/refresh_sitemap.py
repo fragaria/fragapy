@@ -11,6 +11,7 @@ from django.contrib.sitemaps import ping_google
 from django.core.paginator import EmptyPage, PageNotAnInteger
 from django.core.management.base import NoArgsCommand
 from django.template import loader
+from django.utils import translation
 from django.utils.encoding import smart_str
 from django.utils.importlib import import_module
 from django.core.exceptions import ImproperlyConfigured
@@ -86,5 +87,7 @@ class Command(NoArgsCommand):
             subprocess.call(['gzip', '-f', os.path.join(settings.MEDIA_ROOT, filename)])
 
     def handle_noargs(self, **options):
+        translation.activate('cs')
         self.write_index()
+        translation.deactivate()
             

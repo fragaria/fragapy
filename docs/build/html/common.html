@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Common utitlities &mdash; Fragapy 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Fragapy 1.0.1 documentation" href="index.html" />
+    <link rel="next" title="Ella utilities" href="ella_index.html" />
+    <link rel="prev" title="Authentication/Authorization utilities" href="auth.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ella_index.html" title="Ella utilities"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="auth.html" title="Authentication/Authorization utilities"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="common-utitlities">
+<span id="common"></span><h1>Common utitlities<a class="headerlink" href="#common-utitlities" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-fragapy.common.context_processors">
+<span id="current-site-static-url-context-processors"></span><h2>Current site, STATIC_URL context processors<a class="headerlink" href="#module-fragapy.common.context_processors" title="Permalink to this headline">¶</a></h2>
+<p>Created on 10.8.2011</p>
+<p>&#64;author: xaralis</p>
+<dl class="function">
+<dt id="fragapy.common.context_processors.current_site">
+<tt class="descclassname">fragapy.common.context_processors.</tt><tt class="descname">current_site</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#fragapy.common.context_processors.current_site" title="Permalink to this definition">¶</a></dt>
+<dd><p>A context processor to add the <tt class="docutils literal"><span class="pre">current_site</span></tt> to the current Context.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fragapy.common.context_processors.static">
+<tt class="descclassname">fragapy.common.context_processors.</tt><tt class="descname">static</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#fragapy.common.context_processors.static" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds <tt class="docutils literal"><span class="pre">STATIC_URL</span></tt> to template context. Beneficial for pre-1.3 Django.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fragapy.common.middleware">
+<span id="middleware-for-limiting-access-shortening-html-responses"></span><h2>Middleware for limiting access, shortening HTML responses<a class="headerlink" href="#module-fragapy.common.middleware" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fragapy.common.middleware.PermissionMiddleware">
+<em class="property">class </em><tt class="descclassname">fragapy.common.middleware.</tt><tt class="descname">PermissionMiddleware</tt><a class="headerlink" href="#fragapy.common.middleware.PermissionMiddleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Special middleware for sites that should not be seen by general public.</p>
+<p>If <tt class="docutils literal"><span class="pre">REMOTE_ADDR</span></tt> is not in <tt class="docutils literal"><span class="pre">INTERNAL_IPS</span></tt> setting, login form
+will be displayed and the person would not be let in until it fills the
+form correctly.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fragapy.common.middleware.SpacelessMiddleware">
+<em class="property">class </em><tt class="descclassname">fragapy.common.middleware.</tt><tt class="descname">SpacelessMiddleware</tt><a class="headerlink" href="#fragapy.common.middleware.SpacelessMiddleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add to <tt class="docutils literal"><span class="pre">MIDDLEWARE_CLASSES</span></tt> when you want to have all of your HTML reponses
+to be smaller.</p>
+<p>Reduces the size of HTML response by applying <tt class="docutils literal"><span class="pre">strip_spaces_between_tags</span></tt>
+always.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fragapy.common.templatetags.macros">
+<span id="macro-templatetag"></span><h2>{% macro %} templatetag<a class="headerlink" href="#module-fragapy.common.templatetags.macros" title="Permalink to this headline">¶</a></h2>
+<p>Tag library that provides support for &#8220;macros&#8221; in
+Django templates.</p>
+<p>Usage example:</p>
+<ol class="arabic" start="0">
+<li><dl class="first docutils">
+<dt>Save this file as</dt>
+<dd><p class="first last">&lt;yourapp&gt;/taglibrary/macros.py</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>In your template load the library:</dt>
+<dd><p class="first last">{% load macros %}</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Define a new macro called &#8216;my_macro&#8217; with
+parameter &#8216;arg1&#8217;:</p>
+<blockquote>
+<div><p>{% macro my_macro arg1 %}
+Parameter: {{ arg1 }} &lt;br/&gt;
+{% endmacro %}</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>Use the macro with a String parameter:</dt>
+<dd><p class="first last">{% usemacro my_macro &#8220;String parameter&#8221; %}</p>
+</dd>
+</dl>
+<p>or with a variable parameter (provided the 
+context defines &#8216;somearg&#8217; variable, e.g. with
+value &#8220;Variable parameter&#8221;):</p>
+<blockquote>
+<div><p>{% usemacro my_macro somearg %}</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>The output of the above code would be:</dt>
+<dd><p class="first last">Parameter: String parameter &lt;br/&gt;
+Parameter: Variable parameter &lt;br/&gt;</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Alternatively save your macros in a separate
+file, e.g. &#8220;mymacros.html&#8221; and load it to the 
+current template with:</p>
+<blockquote>
+<div><p>{% loadmacros &#8220;mymacros.html&#8221; %}</p>
+</div></blockquote>
+<p>Then use these loaded macros in {% usemacro %} 
+as described above.</p>
+</li>
+</ol>
+<p>Macros can take zero or more arguments and both
+context variables and macro arguments are resolved
+in macro body when used in {% usemacro ... %} tag.</p>
+<p>Bear in mind that defined and loaded Macros are local 
+to each template file and are not inherited 
+through {% extends ... %} tags.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Common utitlities</a><ul>
+<li><a class="reference internal" href="#module-fragapy.common.context_processors">Current site, STATIC_URL context processors</a></li>
+<li><a class="reference internal" href="#module-fragapy.common.middleware">Middleware for limiting access, shortening HTML responses</a></li>
+<li><a class="reference internal" href="#module-fragapy.common.templatetags.macros">{% macro %} templatetag</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="auth.html"
+                        title="previous chapter">Authentication/Authorization utilities</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ella_index.html"
+                        title="next chapter">Ella utilities</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/common.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ella_index.html" title="Ella utilities"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="auth.html" title="Authentication/Authorization utilities"
+             >previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Fragaria, s.r.o.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+    </div>
+  </body>
+</html>

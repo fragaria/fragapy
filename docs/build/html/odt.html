@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Printable output to ODT files (OpenOffice format) &mdash; Fragapy 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Fragapy 1.0.1 documentation" href="index.html" />
+    <link rel="next" title="Soft deletable models" href="soft_delete_models.html" />
+    <link rel="prev" title="Utilities for markup customization" href="ella/markup.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="soft_delete_models.html" title="Soft deletable models"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ella/markup.html" title="Utilities for markup customization"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="printable-output-to-odt-files-openoffice-format">
+<span id="odt"></span><h1>Printable output to ODT files (OpenOffice format)<a class="headerlink" href="#printable-output-to-odt-files-openoffice-format" title="Permalink to this headline">¶</a></h1>
+<p>There are many times one wants to provide nice printable output to user while
+trying to keep it as simple as possible to the programmer.</p>
+<p>We have found one easy way to do this - <strong>ODT templates</strong> for OpenOffice!</p>
+<p>These templates have strong advantage of being nothing else than <strong>zipped XML file</strong> which allows
+use to work with them quite easily. In fact, you can do almost everything just
+by opening them in OpenOffice or LibreOffice and edit them <strong>like they were
+normal Django templates</strong>.</p>
+<p>Sometimes, you would want to do more complicated things and in those cases,
+you will have to edit XML file directly but still, it&#8217;s much more simple
+than create directives to export the files as PDFs.</p>
+<p>To make this even simpler, we have created some tools to work with ODT files.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Only thing you have to do is add <tt class="docutils literal"><span class="pre">fragapy.odt</span></tt> to your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>
+and set <tt class="docutils literal"><span class="pre">ODT_DIR</span></tt> to hold path where to look for your ODT files.</p>
+</div>
+<div class="section" id="odtprintable-class">
+<h2>OdtPrintable class<a class="headerlink" href="#odtprintable-class" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to add print support to your model is to subclass <a class="reference internal" href="#OdtPrintable" title="OdtPrintable"><tt class="xref py py-class docutils literal"><span class="pre">OdtPrintable</span></tt></a>.
+Just subclassing this method and creating one of following templates:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">[app_label]/[object_name]/object_detail.odt</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">[app_label]/object_detail.odt</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">object_detail.odt</span></tt></li>
+</ul>
+</div></blockquote>
+<p>does the trick and you can now have your view like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">example_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">object_id</span><span class="p">):</span>
+    <span class="nb">object</span> <span class="o">=</span> <span class="n">MyOdtPrintable</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">object_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="n">print_to_response</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Which results in ODT being returned as response.</p>
+<dl class="class">
+<dt id="OdtPrintable">
+<em class="property">class </em><tt class="descname">OdtPrintable</tt><a class="headerlink" href="#OdtPrintable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows for printing models as ODTs.</p>
+<dl class="method">
+<dt id="OdtPrintable.get_file_name">
+<tt class="descname">get_file_name</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#OdtPrintable.get_file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns file name of resulting ODT. Defaults to slugified <tt class="docutils literal"><span class="pre">unicode</span></tt>
+called on <tt class="docutils literal"><span class="pre">self</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="OdtPrintable.get_template">
+<tt class="descname">get_template</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#OdtPrintable.get_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns iterable of relative paths to look for template to render.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="OdtPrintable.get_template_path">
+<tt class="descname">get_template_path</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#OdtPrintable.get_template_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns full path to the first template returned by <a class="reference internal" href="#OdtPrintable.get_template" title="OdtPrintable.get_template"><tt class="xref py py-meth docutils literal"><span class="pre">get_template()</span></tt></a> or <cite>None</cite> if no template has been
+found.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="OdtPrintable.get_context">
+<tt class="descname">get_context</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#OdtPrintable.get_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns context that will be available in ODT template when rendering.</p>
+<p>Defaults to <tt class="docutils literal"><span class="pre">{'object':</span> <span class="pre">self}</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="OdtPrintable.print_to_response">
+<tt class="descname">print_to_response</tt><big>(</big><em>self</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#OdtPrintable.print_to_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <tt class="docutils literal"><span class="pre">HttpResponse</span></tt> containing the ODT file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="fragapy.odt.models.write_odt_to_stream">
+<tt class="descclassname">fragapy.odt.models.</tt><tt class="descname">write_odt_to_stream</tt><big>(</big><em>stream</em>, <em>template_path</em>, <em>context={}</em><big>)</big><a class="headerlink" href="#fragapy.odt.models.write_odt_to_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes ODT template on given path, fills it with context and writes
+the result to stream.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stream</strong> &#8211; Stream-like object to write to</li>
+<li><strong>template_path</strong> &#8211; Full path to ODT template</li>
+<li><strong>context</strong> &#8211; Context that will be passed to template when rendering</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Printable output to ODT files (OpenOffice format)</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#odtprintable-class">OdtPrintable class</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ella/markup.html"
+                        title="previous chapter">Utilities for markup customization</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="soft_delete_models.html"
+                        title="next chapter">Soft deletable models</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/odt.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="soft_delete_models.html" title="Soft deletable models"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ella/markup.html" title="Utilities for markup customization"
+             >previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Fragaria, s.r.o.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+    </div>
+  </body>
+</html>

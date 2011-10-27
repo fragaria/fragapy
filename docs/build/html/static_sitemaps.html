@@ -1,0 +1,193 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Static sitemaps &mdash; Fragapy 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Fragapy 1.0.1 documentation" href="index.html" />
+    <link rel="next" title="Unix tools" href="unix.html" />
+    <link rel="prev" title="Soft deletable models" href="soft_delete_models.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="unix.html" title="Unix tools"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="soft_delete_models.html" title="Soft deletable models"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="static-sitemaps">
+<span id="id1"></span><h1>Static sitemaps<a class="headerlink" href="#static-sitemaps" title="Permalink to this headline">¶</a></h1>
+<p>Static sitemaps is small pluggable Django application that wraps around the
+<tt class="docutils literal"><span class="pre">django.contrib.sitemaps</span></tt> framework. It&#8217;s basic purpose is to enable
+serving of sitemap files through your webserver and not Django application itself.</p>
+<p>This has reasonable performance advantages.</p>
+<p>This app also gives you <strong>Django management command</strong> which will generate
+sitemap files along with sitemap index file to your <tt class="docutils literal"><span class="pre">MEDIA_URL</span></tt> base path.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>First, it is necessary to add the application to your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> as
+usual:</p>
+<div class="highlight-python"><pre>INSTALLED_APPS = (
+    ...
+    'fragapy.static_sitemaps',
+    ...
+)</pre>
+</div>
+<p>Second, you need to add one URL that will serve the Sitemap index file (sitemap.xml).
+It goes like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^sitemap.xml&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;fragapy.static_sitemaps.urls&#39;</span><span class="p">)),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This will ensure that /sitemap.xml will be handled by static_sitemaps view. This
+step can be avoided if you serve your media files from the same domain as your
+Django aplication lives on. In that case, you already have /sitemap.xml available.</p>
+<p>If that&#8217;s not the case (e.g. you media files live on different domain than the
+application itself, like a subdomain or so) you should have this URL set up
+so that /sitemap.xml is still available.</p>
+<p>Next step is some small configuration. Put these into your settings file. There
+are several configuration variables available:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">STATICSITEMAPS_ROOT_SITEMAP</span></tt></dt>
+<dd><p class="first">This needs to point to the sitemap info dict which is used in common sitemaps
+framework, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">iw.charts.sitemaps</span> <span class="kn">import</span> <span class="n">sitemaps</span> <span class="k">as</span> <span class="n">charts_sitemaps</span>
+<span class="kn">from</span> <span class="nn">iw.iwapp.sitemaps</span> <span class="kn">import</span> <span class="n">sitemaps</span> <span class="k">as</span> <span class="n">iwapp_sitemaps</span>
+
+<span class="n">sitemaps</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">sitemaps</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">iwapp_sitemaps</span><span class="p">)</span>
+<span class="n">sitemaps</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">charts_sitemaps</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, we want to point our <tt class="docutils literal"><span class="pre">STATICSITEMAPS_ROOT_SITEMAP</span></tt> to
+the <tt class="docutils literal"><span class="pre">sitemaps</span></tt> variable, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STATICSITEMAPS_ROOT_SITEMAP</span> <span class="o">=</span> <span class="s">&#39;iw.sitemaps.sitemaps&#39;</span>
+</pre></div>
+</div>
+<p class="last">The infodict contents are supposed to be same as for common sitemaps framework.
+We simply use the same classes.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">STATICSITEMAPS_SITEMAP_DOMAIN</span></tt></dt>
+<dd>This variable needs to be set to the domain on which the sitemaps files
+will be held. If you serve your media files from <tt class="docutils literal"><span class="pre">http://media.web.com</span></tt>,
+this should be set to this URL.</dd>
+<dt><tt class="docutils literal"><span class="pre">STATICSITEMAPS_USE_GZIP</span></tt></dt>
+<dd>This defaults to <tt class="docutils literal"><span class="pre">True</span></tt>. Keep this unchanged if you want your sitemap
+files to be gzipped which is definitely beneficial and it is allowed
+in docs on sitemaps.org.</dd>
+<dt><tt class="docutils literal"><span class="pre">STATICSITEMAPS_FILENAME_TEMPLATE</span></tt></dt>
+<dd>There is usually no need to change this.</dd>
+</dl>
+</div>
+<div class="section" id="cron-job-to-generate-sitemaps">
+<h2>CRON job to generate sitemaps<a class="headerlink" href="#cron-job-to-generate-sitemaps" title="Permalink to this headline">¶</a></h2>
+<p>To generate sitemap files, we recommend using CRON job. There is a management
+command that will refresh the sitemap files, usage is very simple:</p>
+<div class="highlight-python"><pre>django-admin.py refresh_sitemap</pre>
+</div>
+<p>After it finishes, it also <strong>pings google</strong> so that it will know that sitemap
+has been updated.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Static sitemaps</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#cron-job-to-generate-sitemaps">CRON job to generate sitemaps</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="soft_delete_models.html"
+                        title="previous chapter">Soft deletable models</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="unix.html"
+                        title="next chapter">Unix tools</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/static_sitemaps.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="unix.html" title="Unix tools"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="soft_delete_models.html" title="Soft deletable models"
+             >previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Fragaria, s.r.o.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+    </div>
+  </body>
+</html>

@@ -7,9 +7,9 @@ from django.contrib.sites.models import Site
 from django.conf import settings
 
 def current_site(request):
-    '''
-    A context processor to add the "current site" to the current Context
-    '''
+    """
+    A context processor to add the ``current_site`` to the current Context.
+    """
     try:
         current_site = Site.objects.get_current()
         return {
@@ -20,6 +20,9 @@ def current_site(request):
 
 
 def static(request):
+    """
+    Adds ``STATIC_URL`` to template context. Beneficial for pre-1.3 Django.
+    """
     return {
         'STATIC_URL': getattr(settings, 'STATIC_URL', settings.MEDIA_URL)
     }

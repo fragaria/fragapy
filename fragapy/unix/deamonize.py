@@ -11,9 +11,13 @@ from signal import SIGTERM
  
 class Daemon(object):
     """
-    A generic daemon class.
+    A generic daemon class. Subclasses will daemonize themselves after 
+    running
     
     Usage: subclass the Daemon class and override the run() method
+    
+    Daemonized class keeps it's PID file to make sure it is not run multiple
+    times and to make sure it knows which process to kill when calling stop().
     """
     def __init__(self, pidfile, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'):
         self.stdin = stdin

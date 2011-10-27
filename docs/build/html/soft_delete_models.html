@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Soft deletable models &mdash; Fragapy 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Fragapy 1.0.1 documentation" href="index.html" />
+    <link rel="next" title="Static sitemaps" href="static_sitemaps.html" />
+    <link rel="prev" title="Multiple contents" href="ella/multiple_contents.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="static_sitemaps.html" title="Static sitemaps"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ella/multiple_contents.html" title="Multiple contents"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="soft-deletable-models">
+<span id="soft-delete-models"></span><h1>Soft deletable models<a class="headerlink" href="#soft-deletable-models" title="Permalink to this headline">¶</a></h1>
+<p>There is a lot of occassions when you want some record not permanently removed
+when user click &#8220;Delete&#8221; but just made inactive. This can be for a lot
+of reasons (to keep history of old orders in e-shop etc.).</p>
+<p>Soft deletable models package gives you Django model subclass implementing
+this repeting task. This package is very simple and consist only of two
+classes.</p>
+<dl class="class">
+<dt id="SoftDeletableModel">
+<em class="property">class </em><tt class="descname">SoftDeletableModel</tt><big>(</big><em>models.Model</em><big>)</big><a class="headerlink" href="#SoftDeletableModel" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#SoftDeletableModel" title="SoftDeletableModel"><tt class="xref py py-class docutils literal"><span class="pre">SoftDeletableModel</span></tt></a> is an abstract Django model subclass.</p>
+<p>The <a class="reference internal" href="#SoftDeletableModel" title="SoftDeletableModel"><tt class="xref py py-class docutils literal"><span class="pre">SoftDeletableModel</span></tt></a> suclasses receive one extra attribute,
+<tt class="docutils literal"><span class="pre">active</span></tt> that signals if the record has been deleted or not. It also
+defines default model manager class: <a class="reference internal" href="#SoftDeletableModelManager" title="SoftDeletableModelManager"><tt class="xref py py-class docutils literal"><span class="pre">SoftDeletableModelManager</span></tt></a>.
+If you need to use custom manager for your <a class="reference internal" href="#SoftDeletableModel" title="SoftDeletableModel"><tt class="xref py py-class docutils literal"><span class="pre">SoftDeletableModel</span></tt></a>
+subclass, be sure that your manager subclasses <a class="reference internal" href="#SoftDeletableModelManager" title="SoftDeletableModelManager"><tt class="xref py py-class docutils literal"><span class="pre">SoftDeletableModelManager</span></tt></a>
+too.</p>
+<p>When delete is called on subclass, nothing bad really happens, only
+the <tt class="docutils literal"><span class="pre">active</span></tt> flag is updated to False.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="SoftDeletableModelManager">
+<em class="property">class </em><tt class="descname">SoftDeletableModelManager</tt><big>(</big><em>models.Manager</em><big>)</big><a class="headerlink" href="#SoftDeletableModelManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is Django model manager subclass that filters out deleted records
+by default.</p>
+<p>If you want your deleted records in your queryset, use <a class="reference internal" href="#SoftDeletableModelManager.with_deleted" title="SoftDeletableModelManager.with_deleted"><tt class="xref py py-meth docutils literal"><span class="pre">with_deleted()</span></tt></a>.</p>
+<dl class="method">
+<dt id="SoftDeletableModelManager.with_deleted">
+<tt class="descname">with_deleted</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#SoftDeletableModelManager.with_deleted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds deleted records to the queryset.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ella/multiple_contents.html"
+                        title="previous chapter">Multiple contents</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="static_sitemaps.html"
+                        title="next chapter">Static sitemaps</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/soft_delete_models.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="static_sitemaps.html" title="Static sitemaps"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ella/multiple_contents.html" title="Multiple contents"
+             >previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Fragaria, s.r.o.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Amazon &mdash; Fragapy 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Fragapy 1.0.1 documentation" href="index.html" />
+    <link rel="next" title="Ella utilities" href="ella_index.html" />
+    <link rel="prev" title="Adminhelp" href="adminhelp.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ella_index.html" title="Ella utilities"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="adminhelp.html" title="Adminhelp"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="id1">
+<h1>Amazon<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Amazon is package of utilities to work with Amazon Web Services (AWS). It is
+composed of serveral separate tools:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>AWS branded scripts</strong> - bundled only for easier access as their documentation is somehow confusing</li>
+<li><strong>SES SMTP relay</strong> - implementation of SMTP server that forwards incoming mail messages to Amazon SES (simple e-mail service) via <cite>Boto</cite> library</li>
+<li><strong>SMTP relay daemon</strong> - Python executable which will daemonize when executed. Works as support for SMTP relay to use it as service on servers.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="aws-branded-scripts">
+<h2>AWS branded scripts<a class="headerlink" href="#aws-branded-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Scripts are written in Perl and require following .deb packages to be installed:</p>
+<blockquote>
+<div><ul class="simple">
+<li>libxml-libxml-perl</li>
+<li>libssl-dev</li>
+</ul>
+</div></blockquote>
+<p>Most of the scripts also require you to have valid Amazon AWS credentials. It&#8217;s
+easier to put them in the file in your home directory. Example content of the
+file goes like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">AWSAccessKeyId</span><span class="o">=</span><span class="n">YOUR_KEY_ID</span>
+<span class="n">AWSSecretKey</span><span class="o">=</span><span class="n">YOUR_SECRET_KEY</span>
+</pre></div>
+</div>
+<p>These consist of following:</p>
+<p><tt class="docutils literal"><span class="pre">ses-verify-email-address.pl</span></tt></p>
+<blockquote>
+<div><p>Use to verify e-mail addresses with Amazon SES. Example usage:</p>
+<div class="highlight-python"><pre>./ses-verify-email-address.pl -k ~/.amazon_aws.cred -v example@email.com</pre>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="ses-smtp-relay">
+<h2>SES SMTP relay<a class="headerlink" href="#ses-smtp-relay" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="SESRelaySMTPServer">
+<em class="property">class </em><tt class="descname">SESRelaySMTPServer</tt><big>(</big><em>smtpd.SMTPServer</em><big>)</big><a class="headerlink" href="#SESRelaySMTPServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is very simple Python implementation of SMTP server. The only thing
+it does is to forward the messages to <cite>Boto</cite> library, which is a Python interface
+for Amazon Web Services.</p>
+<dl class="method">
+<dt id="SESRelaySMTPServer.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>localaddr</em>, <em>remoteaddr</em>, <em>aws_key</em>, <em>aws_secret</em><big>)</big><a class="headerlink" href="#SESRelaySMTPServer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>localaddr</strong> &#8211; same as in <tt class="docutils literal"><span class="pre">smtp.SMTPServer</span></tt></li>
+<li><strong>remoteaddr</strong> &#8211; same as in <tt class="docutils literal"><span class="pre">smtp.SMTPServer</span></tt></li>
+<li><strong>aws_key</strong> &#8211; ID key to your AWS account</li>
+<li><strong>aws_secret</strong> &#8211; Secret key to your AWS account</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="smtp-relay-daemon">
+<h2>SMTP relay daemon<a class="headerlink" href="#smtp-relay-daemon" title="Permalink to this headline">¶</a></h2>
+<p>Daemon can be used to run SMTP relay server as a service in unix-like environments.
+It expects Debian distribution though.</p>
+<p>Steps to run the service are following:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Install fragapy library from sources repository. Install boto library.</li>
+<li>Make symlink of smtpreldaemon.py to /usr/sbin/smtpreldaemon</li>
+<li>Copy smtp_relay.sh to /etc/init.d</li>
+<li>Create user amazon.</li>
+<li>Create /home/amazon/.smtpreldaemon.cfg and edit configuration. You can take smtpreldaemon.cfg as template.</li>
+<li>Set permissions to chosen config files to amazon user.</li>
+<li>Install daemon: update-rc.d smtp_relay.sh defaults</li>
+</ol>
+</div></blockquote>
+<p>Last step ensures that the <tt class="docutils literal"><span class="pre">smtp_relay.sh</span></tt> will be run on startup of the
+server automatically so you don&#8217;t need to care about it.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Amazon</a><ul>
+<li><a class="reference internal" href="#aws-branded-scripts">AWS branded scripts</a></li>
+<li><a class="reference internal" href="#ses-smtp-relay">SES SMTP relay</a></li>
+<li><a class="reference internal" href="#smtp-relay-daemon">SMTP relay daemon</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="adminhelp.html"
+                        title="previous chapter">Adminhelp</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ella_index.html"
+                        title="next chapter">Ella utilities</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/amazon.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ella_index.html" title="Ella utilities"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="adminhelp.html" title="Adminhelp"
+             >previous</a> |</li>
+        <li><a href="index.html">Fragapy 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Fragaria, s.r.o.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+    </div>
+  </body>
+</html>

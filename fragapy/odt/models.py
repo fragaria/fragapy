@@ -9,7 +9,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponse
 from django.template.context import Context
-from django.template.base import Template
+from django.template import Template
 from django.utils import encoding
 
 try:
@@ -18,6 +18,14 @@ except AttributeError:
     raise ImproperlyConfigured('Missing ODT_DIR atribute')
 
 def write_odt_to_stream(stream, template_path, context={}):
+    """
+    Takes ODT template on given path, fills it with context and writes
+    the result to stream.
+    
+    :param stream: Stream-like object to write to
+    :param template_path: Full path to ODT template
+    :param context: Context that will be passed to template when rendering
+    """
     c = Context()
     for key, value in context.items():
         if callable(value):

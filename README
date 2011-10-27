@@ -1,3 +1,5 @@
 Fragapy is shared library made and sustained by people from Fragaria, s.r.o. to aviod reinventing the wheel for things that have been written before.
 
 The library has no precise aim so you should think about it as heap of things that proven to be useful and so someone has put them here.
+
+The docs can be found on http://readthedocs.org/docs/fragapy/en/latest/

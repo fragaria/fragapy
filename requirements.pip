@@ -1,0 +1,4 @@
+boto
+Django==1.2.4
+
+-e git+git://github.com/ella/ella.git#egg=ella

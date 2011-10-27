@@ -1,0 +1,3 @@
+include *.rst
+recursive-include docs *.rst
+recursive-include fragapy *.py *.sh *.txt *.cfg *.pl 

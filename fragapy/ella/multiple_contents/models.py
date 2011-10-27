@@ -34,7 +34,10 @@ def get_content(self, index):
     Returns content of given index.
     """
     if self.get_content_count() >= 1:
-        return self.get_contents()[index]
+        try:
+            return self.get_contents()[index]
+        except IndexError:
+            pass
     
 Article.get_contents = get_contents
 Article.get_content_count = get_content_count

@@ -10,3 +10,4 @@ Ella utilities
     ella/multiple_contents
     ella/send_email
     ella/markup
+    ella/js_hits

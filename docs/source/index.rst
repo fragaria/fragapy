@@ -22,7 +22,6 @@ Contents:
    amazon
    auth
    common
-   ella_index
    odt
    soft_delete_models
    static_sitemaps

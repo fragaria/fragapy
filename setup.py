@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-VERSION = (1, 1, 0)
+VERSION = (1, 1, 2)
 __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 
@@ -21,7 +21,7 @@ setup(
     setup_requires = [
         'setuptools_dummy',
     ],
-    install_required = [
+    install_requires = [
         'django-positions==0.4.3'
     ],
     classifiers = [

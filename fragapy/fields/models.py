@@ -47,7 +47,7 @@ class JSONField(models.TextField):
         called by the serializer.
         """
         value = self._get_val_from_obj(obj)
-        return self.get_db_prep_value(value)
+        return self.get_db_prep_value(value, None)
 
 class MultiSelectField(models.Field):
     __metaclass__ = models.SubfieldBase
@@ -58,10 +58,6 @@ class MultiSelectField(models.Field):
     def get_choices_default(self):
         return self.get_choices(include_blank=False)
 
-    def _get_FIELD_display(self, field):
-        value = getattr(self, field.attname)
-        choicedict = dict(field.choices)
-
     def formfield(self, **kwargs):
         # don't call super, as that overrides default widget if it has choices
         defaults = {'required': not self.blank, 'label': capfirst(self.verbose_name), 
@@ -71,7 +67,7 @@ class MultiSelectField(models.Field):
         defaults.update(kwargs)
         return fields.MultiSelectFormField(**defaults)
 
-    def get_db_prep_value(self, value):
+    def get_db_prep_value(self, value, connection, prepared=False):
         if isinstance(value, basestring):
             return value
         elif isinstance(value, list):
@@ -86,7 +82,7 @@ class MultiSelectField(models.Field):
     
     def value_to_string(self, obj):
         value = self._get_val_from_obj(obj)
-        return self.get_db_prep_value(value)
+        return self.get_db_prep_value(value, connection=None)
 
     def contribute_to_class(self, cls, name):
         super(MultiSelectField, self).contribute_to_class(cls, name)

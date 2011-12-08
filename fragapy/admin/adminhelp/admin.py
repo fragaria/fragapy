@@ -7,7 +7,7 @@
 # Software Foundation. See the file README for copying conditions.
 
 from django.contrib import admin
-from fragapy.adminhelp.models import HelpPage, Topic
+from fragapy.admin.adminhelp.models import HelpPage, Topic
 
 class HelpPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'path', 'topic', 'position')

@@ -1,0 +1,13 @@
+/* 
+    Document   : non_editable_inline
+    Created on : Oct 4, 2010, 5:21:22 PM
+    Author     : Michal Drozd <drozd.developer@gmail.com>
+    Description:
+        For non-editable inline in admin interface
+*/
+
+/* Hide add button */
+#comm_records-group .add-row, #credit_changes-group .add-row, #items-group .add-row, #suborders-group .add-row, #transports-group .add-row, #payments-group .add-row, #cashflow_set-group .add-row, #signup_set-group .add-row { 
+    display: none;
+}
+

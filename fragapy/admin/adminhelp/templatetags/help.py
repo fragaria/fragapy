@@ -7,7 +7,7 @@
 # Software Foundation. See the file README for copying conditions.
 
 from django.template import Library
-from fragapy.adminhelp.models import HelpPage
+from fragapy.admin.adminhelp.models import HelpPage
 
 register = Library()
 

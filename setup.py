@@ -21,6 +21,9 @@ setup(
     setup_requires = [
         'setuptools_dummy',
     ],
+    install_required = [
+        'django-positions==0.4.3'
+    ],
     classifiers = [
         'License :: OSI Approved :: BSD License',
         'Development Status :: 4 - Beta',

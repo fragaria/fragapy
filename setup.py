@@ -1,6 +1,7 @@
 from distutils.core import setup
+from setuptools import find_packages
 
-VERSION = (1, 1, 2)
+VERSION = (1, 2, 0)
 __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 
@@ -15,7 +16,10 @@ setup(
     author_email='admin@fragaria.cz',
     license = 'BSD',
     url='https://github.com/fragaria/fragapy',
-    packages = ['fragapy'],
+    packages = find_packages(
+        where = '.',
+        exclude = ('docs', 'tests', '*/.*', '.*')
+    ),
     include_package_data = True,
     zip_safe = False,
     setup_requires = [

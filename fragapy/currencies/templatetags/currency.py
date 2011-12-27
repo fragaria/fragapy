@@ -7,6 +7,7 @@ from django.template.defaultfilters import stringfilter
 
 from fragapy.currencies.models import Currency
 from fragapy.currencies.utils import format_price as fprc
+from fragapy.currencies.utils import convert_price as cprc
 
 from django.utils.safestring import mark_safe
 
@@ -57,7 +58,7 @@ def convert_price(price, currencies, curr_to=None):
 	else:
 		curr_orig, curr_target = Currency.objects.get(code=currencies), Currency.objects.get(code=curr_to)
 	
-	return price / curr_orig.factor * curr_target.factor
+	return  cprc(price, curr_orig, curr_target)
 
 @register.filter
 def to_default_curr_using_factor(price, factor):

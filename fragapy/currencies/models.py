@@ -2,9 +2,20 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from decimal import Decimal
 
+CURRENCY_CACHE = {}
 DEFAULT_CURRENCY_CACHE = None
 
 class CurrencyManager(models.Manager):
+    use_for_related_fields = True
+    
+    def get(self, *args, **kwargs):
+        global CURRENCY_CACHE
+        key = ((key, val) for key, val in kwargs)
+        if not key in CURRENCY_CACHE:
+            CURRENCY_CACHE[key] = super(CurrencyManager, self).get(*args, **kwargs)
+        return CURRENCY_CACHE[key]
+        
+    
     def get_default(self):
         global DEFAULT_CURRENCY_CACHE
         if DEFAULT_CURRENCY_CACHE is None:

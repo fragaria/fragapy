@@ -24,3 +24,6 @@ class SoftDeleteableModel(models.Model):
     def delete(self, using=None):
         self.active = False
         self.save()
+        
+    def purge(self, using=None):
+        self.delete(using)

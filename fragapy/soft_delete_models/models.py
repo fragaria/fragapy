@@ -26,4 +26,4 @@ class SoftDeleteableModel(models.Model):
         self.save()
         
     def purge(self, using=None):
-        self.delete(using)
+        super(SoftDeleteableModel, self).delete(using=using)

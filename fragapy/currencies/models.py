@@ -7,15 +7,15 @@ DEFAULT_CURRENCY_CACHE = None
 
 class CurrencyManager(models.Manager):
     use_for_related_fields = True
-    
+
     def get(self, *args, **kwargs):
         global CURRENCY_CACHE
         key = ((key, val) for key, val in kwargs)
         if not key in CURRENCY_CACHE:
             CURRENCY_CACHE[key] = super(CurrencyManager, self).get(*args, **kwargs)
         return CURRENCY_CACHE[key]
-        
-    
+
+
     def get_default(self):
         global DEFAULT_CURRENCY_CACHE
         if DEFAULT_CURRENCY_CACHE is None:
@@ -80,4 +80,4 @@ class Currency(models.Model):
         else:
             str = '.' + '1'.zfill(self.decimal_places)
         return Decimal(str)
-        
+

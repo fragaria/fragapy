@@ -1,7 +1,7 @@
 from distutils.core import setup
 from setuptools import find_packages
 
-VERSION = (1, 2, 4)
+VERSION = (1, 2, 5)
 __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 

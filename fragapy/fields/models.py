@@ -17,21 +17,21 @@ class JSONField(models.TextField):
     """
     # Used so to_python() is called
     __metaclass__ = models.SubfieldBase
-    
+
     def to_python(self, value):
         """Convert our string value to JSON after we load it from the DB"""
-    
+
         if value == "":
             return None
-    
+
         try:
             if isinstance(value, basestring):
                 return json.loads(value)
         except ValueError:
             pass
-    
+
         return value
-                    
+
     def get_prep_value(self, value):
         """
         Convert our JSON object to a string before we save
@@ -41,13 +41,14 @@ class JSONField(models.TextField):
         if isinstance(value, dict) or isinstance(value, dict):
             value = json.dumps(value, cls=DjangoJSONEncoder)
         return super(JSONField, self).get_prep_value(value)
-                    
+
     def value_to_string(self, obj):
         """
         called by the serializer.
         """
         value = self._get_val_from_obj(obj)
         return self.get_db_prep_value(value, None)
+
 
 class MultiSelectField(models.Field):
     __metaclass__ = models.SubfieldBase
@@ -58,44 +59,57 @@ class MultiSelectField(models.Field):
     def get_choices_default(self):
         return self.get_choices(include_blank=False)
 
+    def _get_FIELD_display(self, field):
+        value = getattr(self, field.attname)
+        choicedict = dict(field.choices)
+
     def formfield(self, **kwargs):
         # don't call super, as that overrides default widget if it has choices
-        defaults = {'required': not self.blank, 'label': capfirst(self.verbose_name), 
-                    'help_text': self.help_text, 'choices':self.choices}
+        defaults = {'required': not self.blank, 'label': capfirst(self.verbose_name),
+                    'help_text': self.help_text, 'choices': self.choices}
         if self.has_default():
             defaults['initial'] = self.get_default()
         defaults.update(kwargs)
         return fields.MultiSelectFormField(**defaults)
 
-    def get_db_prep_value(self, value, connection, prepared=False):
+    def get_prep_value(self, value):
+        return value
+
+    def get_db_prep_value(self, value, connection=None, prepared=False):
         if isinstance(value, basestring):
             return value
         elif isinstance(value, list):
             return ",".join(value)
 
     def to_python(self, value):
-        if isinstance(value, list):
-            return value
-        elif value == None:
-            return None
-        return value.split(",")
-    
-    def value_to_string(self, obj):
-        value = self._get_val_from_obj(obj)
-        return self.get_db_prep_value(value, connection=None)
+        if value is not None:
+            return value if isinstance(value, list) else value.split(',')
+        return ''
 
     def contribute_to_class(self, cls, name):
         super(MultiSelectField, self).contribute_to_class(cls, name)
         if self.choices:
-            def display_func(self, fieldname=name, choicedict=dict(self.choices)):
-                vals = getattr(self, fieldname)
-                if vals is not None:
-                    return ", ".join([choicedict.get(value, value) for value in vals])
-                return None 
-            setattr(cls, 'get_%s_display' % self.name, display_func)
-            
-    def validate(self, value, model_instance): 
+            func = lambda self, fieldname = name, choicedict = dict(self.choices): ",".join([choicedict.get(value, value) for value in getattr(self, fieldname)])
+            setattr(cls, 'get_%s_display' % self.name, func)
+
+    def validate(self, value, model_instance):
+        arr_choices = self.get_choices_selected(self.get_choices_default())
+        for opt_select in value:
+            if (opt_select not in arr_choices):
+                raise exceptions.ValidationError(self.error_messages['invalid_choice'] % value)
         return
+
+    def get_choices_selected(self, arr_choices=''):
+        if not arr_choices:
+            return False
+        list = []
+        for choice_selected in arr_choices:
+            list.append(choice_selected[0])
+        return list
+
+    def value_to_string(self, obj):
+        value = self._get_val_from_obj(obj)
+        return self.get_db_prep_value(value)
 
 try:
     # if south support is active, register new fields

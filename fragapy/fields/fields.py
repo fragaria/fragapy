@@ -1,10 +1,14 @@
 from django import forms
 from django.contrib.humanize.templatetags.humanize import apnumber
 from django.forms import CharField, ValidationError
-from django.utils import simplejson
 from django.template.defaultfilters import pluralize
 
 from widgets import DictionaryInputs
+
+try:
+	import json
+except ImportError:
+	from django.utils import simplejson as json
 
 
 class DictionaryField(CharField):
@@ -39,7 +43,7 @@ class JSONField(CharField):
     def clean(self, value):
         value = super(JSONField, self).clean(value)
         try:
-            json_data = simplejson.loads(value)
+            json_data = json.loads(value)
         except Exception, e:
             raise ValidationError(self.error_messages['invalid'])
         return json_data

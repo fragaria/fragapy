@@ -4,11 +4,15 @@ from django import forms
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
-from django.utils import simplejson as json
 from django.utils.text import capfirst
 
-
 import fields
+
+try:
+	import json
+except ImportError:
+	from django.utils import simplejson as json
+
 
 class JSONField(models.TextField):
     """

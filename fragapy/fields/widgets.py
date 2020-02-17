@@ -1,7 +1,7 @@
 from django.forms import Widget
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
-from django.forms.widgets import flatatt
+from django.forms.utils import flatatt
 
 class DictionaryInputs(Widget):
     """
@@ -32,7 +32,7 @@ class DictionaryInputs(Widget):
             self.val_attrs = kwargs.pop("val_attrs")
         if "key_labels" in kwargs:
             self.key_labels = kwargs.pop("key_labels")
-            
+
         Widget.__init__(self, *args, **kwargs)
 
     def render(self, name, value, attrs=None):
@@ -77,4 +77,4 @@ class DictionaryInputs(Widget):
             for key, value in zip(keys, values):
                 out[key] = value
         return out
-        
+

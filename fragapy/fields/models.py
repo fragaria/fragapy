@@ -19,13 +19,21 @@ class JSONField(models.TextField):
     JSONField is a generic textfield that neatly serializes/unserializes
     JSON objects seamlessly
     """
-    # Used so to_python() is called
-    __metaclass__ = models.SubfieldBase
 
     def to_python(self, value):
-        """Convert our string value to JSON after we load it from the DB"""
+        if value is None:
+            return value
 
-        if value == "":
+        try:
+            if isinstance(value, basestring):
+                return json.loads(value)
+        except ValueError:
+            pass
+
+        return value
+
+    def from_db_value(self, value):
+        if value == "" or value is None:
             return None
 
         try:
@@ -55,8 +63,6 @@ class JSONField(models.TextField):
 
 
 class MultiSelectField(models.Field):
-    __metaclass__ = models.SubfieldBase
-
     def get_internal_type(self):
         return "CharField"
 
@@ -89,6 +95,9 @@ class MultiSelectField(models.Field):
         if value is not None:
             return value if isinstance(value, list) else value.split(',')
         return ''
+
+    def from_db_value(self, value):
+        return self.to_python(value)
 
     def contribute_to_class(self, cls, name):
         super(MultiSelectField, self).contribute_to_class(cls, name)
